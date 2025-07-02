@@ -1,0 +1,74 @@
+MSroot <- function(X) {
+  # If X is a scalar, return its square root as a 1x1 matrix
+  if (length(X) == 1) {
+    MSroot <- matrix(sqrt(X), 1, 1)
+  } else {
+    # Compute the Singular Value Decomposition (SVD): X = U D V^T
+    SVD <- svd(X)
+    
+    # Compute the matrix square root: U * sqrt(D) * V^T
+    # sqrt(D) is the diagonal matrix of square roots of singular values
+    MSroot <- SVD$u %*% (tcrossprod(sqrt(diag(SVD$d)), SVD$v))
+  }
+  return(MSroot)
+}
+
+
+MSrootcompact <- function(X) {
+  # If X is a scalar, return its square root as a 1x1 matrix
+  if (length(X) == 1) {
+    MSroot <- matrix(sqrt(X), 1, 1)
+  } else {
+    # Compute the rank of X using QR decomposition
+    r <- qr(X)$rank
+    
+    # Compute the Singular Value Decomposition (SVD): X = U D V^T
+    SVD <- svd(X)
+    
+    # Use only the top-r components of the SVD
+    # Construct sqrt(D_r) with the largest r singular values
+    # Return sqrt(D_r) * U^T (a compact square root representation)
+    MSroot <- sqrt(diag(SVD$d[1:r])) %*% t(SVD$u[, 1:r])
+  }
+  return(MSroot)
+}
+  
+  
+  CompanionHypothesis <- function(H, y) {
+    # Compute the compact matrix square root of H^T H
+    Laux <- MSrootcompact(t(H) %*% H)
+    
+    # Solve L^T * ytilde = H^T * y for ytilde
+    ytilde <- qr.solve(t(Laux), t(H) %*% y)
+    
+    # Scale L such that ||y|| = ||L * ytilde|| 
+    scale_factor <- sqrt(sum(y^2)) / sqrt(sum(ytilde^2))
+    L <- scale_factor * Laux
+    
+    # Return the transformed matrix L and transformed vector ytilde
+    return(list("L" = L, "ytilde" = ytilde))
+  }
+  
+  ZhangHypothesis <- function(H, y) {
+    # Perform QR decomposition of H^T to identify linearly independent rows
+    q <- qr(t(H))
+    
+    # Select the indices corresponding to the rank of H^T
+    Index <- q$pivot[seq(q$rank)]
+    
+    # Reduce H and y to linearly independent rows only
+    Haux <- H[Index, ]
+    yaux <- y[Index, ]
+    
+    # Compute the matrix square root of the inverse of Haux * Haux^T
+    Gaux <- MSroot(solve(Haux %*% t(Haux)))
+    
+    # Construct G = Gaux * Haux
+    G <- Gaux %*% Haux
+    
+    # Transform the vector y: yGtilde = Gaux * yaux
+    yGtilde <- Gaux %*% yaux
+    
+    # Return G and the transformed vector yGtilde
+    return(list("G" = G, "yGtilde" = yGtilde))
+  }

@@ -9,7 +9,7 @@ This repository contains R code and supporting functions for the paper:
 - R function `MSroot` to calculating the matrix square root of a positiv semidefinit matrix.
 - R function `MSrootcompact` to calculating the compact root of a positiv semidefinit matrix to transform the hypothesismatrix without changing the value of the ATS (Anova-type-statistic).
 - R function `CompanionHypothesis` which for a given linear nullhypothesis (specified throug hypothesis matrix **H** and corresponding vector **y**) returns the hypothesis matrix **L** and corresponding **ytilde**. These formulate the same hypothesis as the initial ones, and also result in the same value of the ATS, but have a minimal number of rows. 
-- R function `ZhangHypothesis` which for a given linear nullhypothesis (specified throug hypothesis matrix H and corresponding vector y) returns the hypothesis **G** and corresponding **yGtilde**. based on the work of Zhang et al. (2017)
+- R function `ZhangHypothesis` which for a given linear nullhypothesis (specified throug hypothesis matrix **H** and corresponding vector **y**) returns the hypothesis **G** and corresponding **yGtilde**. based on the work of Zhang et al. (2017)
 
 ## Literature
 - Sattler, P. und Rosenbaum, M. (2025); Choice of the hypothesis matrix for using the Anova-type-statistic. Statistics & Probability Letters, Volume 219, page 110356.

@@ -14,7 +14,7 @@ This repository contains R code and supporting functions for the paper:
 - R function `ZhangHypothesis`, which for a given linear null hypothesis (specified through hypothesis matrix **H** and corresponding vector **y**) returns the hypothesis **G** and corresponding **yGtilde**, based on the work of Zhang et al. (2017)
 
 ## Literature
-- Sattler, P. und Rosenbaum, M. (2025); Choice of the hypothesis matrix for using the Anova-type-statistic. Statistics & Probability Letters, Volume 219, page 110356.
+- Sattler, P. and Rosenbaum, M. (2025); Choice of the hypothesis matrix for using the Anova-type-statistic. Statistics & Probability Letters, Volume 219, page 110356.
  <https://doi.org/10.1016/j.spl.2025.110356)>
 - Zhang, J.T., Guo, J., Zhou, B., 2017. Linear hypothesis testing in high-dimensional one-way manova. J. Multivariate Anal. 155, 200–216.
  <http://dx.doi.org/10.1016/j.jmva.2017.01.002>

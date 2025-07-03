@@ -3,6 +3,8 @@ This repository contains R code and supporting functions for the paper:
 
 **"Choice of the hypothesis matrix for using the ANOVA-type statistic"** by Paavo Sattler and Manuel Rosenbaum
  (<https://doi.org/10.1016/j.spl.2025.110356>)
+ 
+ which allows for reformulating the considered linear hypothesis into a smaller expression, saving computational effort. These reformulations are chosen in a way that the value of the ANOVA-type statistic is not influenced, while different versions thereof are considered.
 
 
 ## Contents

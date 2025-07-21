@@ -37,13 +37,18 @@ MSrootcompact <- function(X) {
   CompanionHypothesis <- function(H, y) {
     # Compute the compact matrix square root of H^T H
     Laux <- MSrootcompact(t(H) %*% H)
-    
+    if(!is.null(y)|all(y == 0))
+    {L=Laux
+    ytilde=rep(0,dim(L)[1])
+    }
+    else
+    {
     # Solve L^T * ytilde = H^T * y for ytilde
     ytilde <- qr.solve(t(Laux), t(H) %*% y)
     
     # Scale L such that ||y|| = ||L * ytilde|| 
     scale_factor <- sqrt(sum(y^2)) / sqrt(sum(ytilde^2))
-    L <- scale_factor * Laux
+    L <- scale_factor * Laux}
     
     # Return the transformed matrix L and transformed vector ytilde
     return(list("L" = L, "ytilde" = ytilde))

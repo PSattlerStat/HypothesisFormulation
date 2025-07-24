@@ -28,7 +28,7 @@ MSrootcompact <- function(X) {
     # Use only the top-r components of the SVD
     # Construct sqrt(D_r) with the largest r singular values
     # Return sqrt(D_r) * U^T (a compact square root representation)
-    MSroot <- sqrt(diag(SVD$d[1:r])) %*% t(SVD$u[, 1:r])
+    MSroot <- sqrt(diag(SVD$d[1:r,drop=FALSE])) %*% t(SVD$u[, 1:r,drop=FALSE])
   }
   return(MSroot)
 }
